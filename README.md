@@ -7,25 +7,18 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
   * [The Story so Far](#the-story-so-far)
   * [Notebooks](#notebooks)
     * [U2Net](#u2net)
     * [MODNet](#modnet)
     * [TensorRT](#tensorrt)
-    * [Data Prep](#data-prep)
-  * [Scripts and Tools](#scripts-and-tools)
-  * [Research](#research)
-  * [Reporting](#reporting)
-  * [Supplementary Data](#supplementary-data)
-* [Proposed Updates](#proposed-updates)
-* [License](#license)
-* [Contact](#contact)
+  * [Scripts and tools](#scripts-and-tools)
+* [Discussion and conclusion](#discussion-and-conclusion)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The produced alpha matte (right sub-figure in Figure 1) can further used for extracting the alpha matte (middle in Figure 1) from the original image(left in Figure 1).
+Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted clothing matte (right) can further used for extracting the alpha matte (middle) from the original image(left).
 
 ![product-screenshot-tbc](images/download.png)
 
@@ -46,7 +39,9 @@ Image matting is the research area that algorithms can accurately extract the fo
 
 ### The Story So Far
 
-MODNet was designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting.
+MODNet was designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting. Aim to extract the clothing matte from daily photos.
+
+### notebooks
 
 #### MODNet
 
@@ -91,14 +86,25 @@ of the original U2Net implementation including a Pyrtorch versus ONNX comparison
 
 Given that the the u2net scripts section has become so populated please see the u2net landing [page](scripts/u2net/README.md) for further instruction and functionality.
 
+### Discussion and conclusion
 
-### Supplementary Data
+There were parallel research conducting aiming clothing matting together with the team members. One is the mentioned MODNet, the other is [U-2-Net](https://github.com/xuebinqin/U-2-Net).
 
-While we're hoping to version control as best we can, given the nature of our work we can expect data to exceed the confines of this repo. Check here regularly or within any notebooks themselves for training data or pretrained models. As it stands all checkpoints, saved image data and results can be found at the following private drive link:
+During the weekly client meeting, we consistently compare, discuss the two models.
 
-[Supporting data](https://drive.google.com/drive/folders/168swtLLjG722I2nzggNr2FCbVOS-1KqN?usp=sharing)
+Based on the same device and same training size used for training, MODNet is quicker to train due to the lightweight architecture. For MODNet, 12 experiments were designed.
+
+1. Different impletation of data augmentations
+2. Different raining sample sizes, types
+3. Varying training strategies: from scratch vs transfer learning
+4. Fine-tuning
+5. Sub-objective consistency adaption
+
+As a conclusion, MODNet is trained quicker, and correspondingly inferenced quicker. Whereas, MODNet is good at detail prediction due to the attention mechanism and lightweight strategy for training.
+U-2-Net has a very complex architecture which renders slow training and inference. However, due to the complexity of the model, U-2-Net did really well on semantic prediction. 
 
 
+<!--
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/peace-and-harmony/image-matting/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
@@ -135,4 +141,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 
 ### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out. -->
