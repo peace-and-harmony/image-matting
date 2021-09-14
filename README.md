@@ -20,16 +20,16 @@
 
 Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted clothing matte (right) can further used for extracting the alpha matte (middle) from the original image(left).
 
-![product-screenshot-tbc](images/download.png)
+![product-screenshot-tbc](images/sample_inference.png)
 
 ### Built With
 
-* [ONNX](https://onnx.ai/)
-* [OpenCV](https://opencv.org/)
-* [Tensorflow](https://www.tensorflow.org/)
-* [PyTorch](https://pytorch.org/)
-* [TesnorRT](https://developer.nvidia.com/tensorrt)
 * [MODNet](https://github.com/ZHKKKe/MODNet)
+* [PyTorch](https://pytorch.org/)
+* [OpenCV](https://opencv.org/)
+* [ONNX](https://onnx.ai/)
+* [Tensorflow](https://www.tensorflow.org/)
+* [TesnorRT](https://developer.nvidia.com/tensorrt)
 <!-- * [U-2-Net](https://github.com/xuebinqin/U-2-Net) -->
 
 
@@ -39,43 +39,33 @@ Image matting is the research area that algorithms can accurately extract the fo
 
 ### The Story So Far
 
-MODNet was designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting. Aim to extract the clothing matte from daily photos.
+MODNet was originally designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting, aiming to extract the clothing matte from daily photos.
 
 ### notebooks
 
 #### MODNet
 
-
 1. [MODNet demo - Benchmark edition ](notebooks/modnet_demo_benchmark_edition.ipynb) - An initial on the rails demo
-of the original U2Net implementation including a Pyrtorch versus ONNX comparison benchmark. A guide as as to conversion to TensorRT and a subsequent benchmark.
+of the original MODNet implementation including a comparison of the average inference runtime between Pytorch and ONNX. Besides, a walkthrough of TensorRT implementation as well.
 
  **Note** Insert a table for the resulting benchmark.
 
-2. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) - A brief runtrhough of what a training run looks like whether via an Ipython interactive environment, local machine or vm instance. The notebook guides the user through merging both the Fashionpedia and Pronti datsets, allows a user to switch between the original augs and or custom augs, along with allowing a user to continue training a stalled session from the command line.
+2. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) - A illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The notebook contains loading data along with allowing a user to continue training from stored session from the command line.
 
-- Guided meging of both the Fashionpedia and Pronti dataset.
 - Implementation of custom PyTorch based transforms.
-- Initialisation from a pretrained backbone.
-- The ability to resume after a stalled or stopped session.
+- Initialisation from a pre-trained backbone.
+- The ability to resume after a stopped session.
 
-3. [MODNet eval](notebooks/MODNet_eval.ipynb) - As the label describes on the tin the, follow the notebook's colab badge in order to receive an on the rails guide as to evaluation procedure with an active checkpoint. Further functionality includes:
-
- - The ability to strip a training checkpoint ready for serving.
+3. [MODNet eval](notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
 
 
-4. [MODNet ONNX conversion](notebooks/u2net/u2net_onnx_throughput.ipynb) - A sandboxed implementation of `u2net_onnx_mp.py` allowing the following:
+4. [MODNet ONNX conversion](notebooks/u2net/u2net_onnx_throughput.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
 
  - Adjustment of a prepared onnx model to a chosen static batch.
- - Conversion of a provided datset to a base64 encoded string tagged by unique uuid, alternatively a prepared json is available via our shared [folder](https://drive.google.com/drive/folders/168swtLLjG722I2nzggNr2FCbVOS-1KqN?usp=sharing) based on the datset that's currently being labelled.
- - Mock implementation and streaming of incoming data. Allowing a user to either view per-batch benchmarks as they're available or visualise incoming cropped images decoded from the ouput base64 json.
-
- **Note** For demo purposes this implementation has been stripped from flask and simulates the scenario with a seperate thread feeding random chunks of the overall json. The concept still applies however should you wish to implement the module with Flask and a filesystem listener etc.
-
- Please also note that a breakdown of the module itself along with advanced usage can also be found at the U2Net landing [page](scripts/u2net/README.md) once again.
 
 #### TensorRT
 
-1. [Resnet50 - onnx - TensorRT](notebooks/tensorrt/resnet50_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utlising some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
+[Resnet50 - onnx - TensorRT](notebooks/tensorrt/resnet50_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utlising some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
 
     **Note** that while ResNet50 is used here all available models have been verified within this woorkflow, it's therefore possoble to used advanced architectures suchas Efficientnet B7 for a fraction of the inference cost.
 
@@ -101,7 +91,7 @@ Based on the same device and same training size used for training, MODNet is qui
 5. Sub-objective consistency adaption
 
 As a conclusion, MODNet is trained quicker, and correspondingly inferenced quicker. Whereas, MODNet is good at detail prediction due to the attention mechanism and lightweight strategy for training.
-U-2-Net has a very complex architecture which renders slow training and inference. However, due to the complexity of the model, U-2-Net did really well on semantic prediction. 
+U-2-Net has a very complex architecture which renders slow training and inference. However, due to the complexity of the model, U-2-Net did really well on semantic prediction.
 
 
 <!--
