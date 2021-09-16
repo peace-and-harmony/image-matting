@@ -9,9 +9,8 @@
 * [Getting Started](#getting-started)
   * [The Story so Far](#the-story-so-far)
   * [Notebooks](#notebooks)
-    * [U2Net](#u2net)
     * [MODNet](#modnet)
-    * [TensorRT](#tensorrt)
+    * [Inference](#inference)
   * [Scripts and tools](#scripts-and-tools)
 * [Discussion and conclusion](#discussion-and-conclusion)
 
@@ -59,17 +58,15 @@ of the original MODNet implementation including a comparison of the average infe
 3. [MODNet eval](notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
 
 
-4. [MODNet ONNX conversion](notebooks/u2net/u2net_onnx_throughput.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
+#### Inference
+
+1. [MODNet inference](notebooks/MODNet_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint.
+
+2. [MODNet ONNX conversion](notebooks/u2net/u2net_onnx_throughput.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
 
  - Adjustment of a prepared onnx model to a chosen static batch.
 
-#### TensorRT
-
-[Resnet50 - onnx - TensorRT](notebooks/tensorrt/resnet50_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utlising some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
-
-    **Note** that while ResNet50 is used here all available models have been verified within this woorkflow, it's therefore possoble to used advanced architectures suchas Efficientnet B7 for a fraction of the inference cost.
-
-    It's also worth noting the findings here also apply to Pytorch with a few tweaks.
+3. [MODNet - onnx - TensorRT](notebooks/tensorrt/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utlising some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
 
 
 ### Scripts and Tools
