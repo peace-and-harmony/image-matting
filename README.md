@@ -16,7 +16,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+(larger figure)
 Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted clothing matte (right) can further used for extracting the alpha matte (middle) from the original image(left).
 
 ![product-screenshot-tbc](images/sample_inference.png)
@@ -38,7 +38,8 @@ Image matting is the research area that algorithms can accurately extract the fo
 
 ### The Story So Far
 
-MODNet was originally designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting, aiming to extract the clothing matte from daily photos.
+MODNet was originally designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting, aiming to extract the clothing matte from daily photos for further recommendation system.
+The type of clothing includes dress, shoes, trousers, T-shirt, etc. corresponding figures are illustrated in the figure.
 
 ### notebooks
 
@@ -60,9 +61,9 @@ of the original MODNet implementation including a comparison of the average infe
 
 #### Inference
 
-1. [MODNet inference](notebooks/MODNet_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint.
+1. [MODNet inference](notebooks/modnet_pytorch_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint.
 
-2. [MODNet ONNX conversion](notebooks/u2net/u2net_onnx_throughput.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
+2. [MODNet ONNX conversion](notebooks/modnet_onnx_conversion/modnet_onnx_conversion.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
 
  - Adjustment of a prepared onnx model to a chosen static batch.
 
