@@ -19,7 +19,13 @@
 (larger figure)
 Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted clothing matte (right) can further used for extracting the alpha matte (middle) from the original image(left).
 
-![product-screenshot-tbc](images/sample_inference.png)
+<figure align="center">
+  <img src="images/sample_inference.png">
+  <figcaption>Figure 1. Illustration of a sample inference.</figcaption>
+</figure>
+
+Based on the extracted alpha matte, many interesting tasks can be further achieved. For example, using a corresponding recommender, it is plausible to match a dress with a hat, shoes and even accessories.
+ <!-- For more information, please check [MODNet](https://github.com/ZHKKKe/MODNet) -->
 
 ### Built With
 
@@ -40,6 +46,13 @@ Image matting is the research area that algorithms can accurately extract the fo
 
 MODNet was originally designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting, aiming to extract the clothing matte from daily photos for further recommendation system.
 The type of clothing includes dress, shoes, trousers, T-shirt, etc. corresponding figures are illustrated in the figure.
+
+<figure align="center">
+  <img src="images/test.jpg">
+  <figcaption>Figure 2. Illustation of inference images on different categories and backgrounds.</figcaption>
+</figure>
+
+It is shown that the algorithms can handle varies backgrounds. And the model predicts well on the main categories including: hat, skirt, shoes, dress, shorts, blouse, hoodie, jeans.
 
 ### notebooks
 
