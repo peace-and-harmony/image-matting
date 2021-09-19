@@ -17,14 +17,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 (larger figure)
-Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted clothing matte (right) can further used for extracting the alpha matte (middle) from the original image(left).
+Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted alpha matte (right) can further used for extracting the foreground (middle) from the original image(left).
 
 <figure align="center">
   <img src="images/sample_inference.png">
   <figcaption>Figure 1. Illustration of a sample inference.</figcaption>
 </figure>
 
-Based on the extracted alpha matte, many interesting tasks can be further achieved. For example, using a corresponding recommender, it is plausible to match a dress with a hat, shoes and even accessories.
+Based on the extracted foreground objects, many interesting tasks can be further achieved. For example, using a specific recommender algorithm, it is plausible to match a dress with a hat, shoes and even accessories based on some customized requests.
  <!-- For more information, please check [MODNet](https://github.com/ZHKKKe/MODNet) -->
 
 ### Built With
