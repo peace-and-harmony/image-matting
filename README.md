@@ -4,10 +4,10 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [The Story so Far](#the-story-so-far)
+* [About the project](#about-the-project)
+  * [Built with](#built-with)
+* [Getting started](#getting-started)
+  * [The story so Far](#the-story-so-far)
   * [Notebooks](#notebooks)
     * [MODNet](#modnet)
     * [Inference](#inference)
@@ -16,15 +16,14 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-(larger figure)
-Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted alpha matte (right) can further used for extracting the foreground (middle) from the original image(left).
+Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted alpha matte(middle) can further used for extracting the foreground object(left) from the original image(right).
 
 <figure align="center">
   <img src="images/image_matting.png">
-  <figcaption>Figure 1. Illustration of a sample inference.</figcaption>
+  <figcaption>Figure 1. Illustration of image matting.</figcaption>
 </figure>
 
-Based on the extracted foreground objects, many interesting tasks can be further achieved. For example, using a specific recommender algorithm, it is plausible to match a dress with a hat, shoes and even accessories based on some customized requests.
+Based on the extracted foreground objects, many interesting tasks can be further achieved. For example, using a specific recommendation system, it is plausible to match a dress with a hat, shoes and even accessories based on some customized requests. This project focused on the image matting procedure.
  <!-- For more information, please check [MODNet](https://github.com/ZHKKKe/MODNet) -->
 
 ### Built With
@@ -44,50 +43,49 @@ Based on the extracted foreground objects, many interesting tasks can be further
 
 ### The Story So Far
 
-MODNet was originally designed for portrait matting. Here, we adapted the architectures of MODNet to the domain of clothing matting, aiming to extract the clothing matte from daily photos for further recommendation system.
-The types of clothing includes dress, shoes, trousers, T-shirt, etc. corresponding results are illustrated in Figure 2.
+MODNet was originally designed for portrait matting. Here, we adapted the architecture of MODNet to the domain of clothing matting, aiming to extract the clothing foreground object from daily photos for next step of recommendation system. The model predicts well on the categories including: hats, skirt, shoes, dresses, shorts, blouses, hoodies, jeans. Some of the mentioned items are shown in Figure 2.
 
 <figure align="center">
   <img src="images/inference_samples.jpg">
-  <figcaption>Figure 2. Original image, foreground object, and corresponding alpha matte in each sub-figure on different categories.</figcaption>
+  <figcaption>Figure 2. Foreground object, alpha matte, and the original image in each sub-figure are presented belong to different categories and backgrounds.</figcaption>
 </figure>
 
-It is shown that the algorithms can handle varies backgrounds, e.g. placing items on the ground and sheet, and hanging items in front of door/wall, even with a low contrast. And the model predicts well on the main categories including: hats, skirt, shoes, dresses, shorts, blouses, hoodies, jeans. Part of the mentioned items are shown in Figure 2.
+Besides, it can be seen that the algorithms can handle varies backgrounds, e.g. flatly placing items on the ground/sheet, or hanging items in front of door/wall, even with a low contrast as shown in the first sub-figure.
 
 ### notebooks
 
 #### MODNet
 
-1. [MODNet demo - Benchmark edition ](notebooks/modnet_demo_benchmark_edition.ipynb) - An initial on the rails demo
-of the original MODNet implementation including a comparison of the average inference runtime between Pytorch and ONNX. Besides, a walkthrough of TensorRT implementation as well.
+1. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) - A illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The notebook contains loading data along with allowing a user to continue training from stored session from the command line.
 
- **Note** Insert a table for the resulting benchmark.
-
-2. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) - A illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The notebook contains loading data along with allowing a user to continue training from stored session from the command line.
-
-- Implementation of custom PyTorch based transforms.
-- Initialisation from a pre-trained backbone.
+- Implementation of customized PyTorch based transforms.
+- Initialization from a pre-trained backbone.
 - The ability to resume after a stopped session.
 
-3. [MODNet eval](notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
+2. [MODNet eval](notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
+
+3. [MODNet quick inference](notebooks/modnet_pytorch_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint when only CPU is available.
 
 
 #### Inference
 
-1. [MODNet inference](notebooks/modnet_pytorch_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint.
+1. [MODNet demo - Benchmark edition ](notebooks/modnet_demo_benchmark_edition.ipynb) - An initial on the rails demo
+of the original MODNet implementation including a comparison of the average inference runtime between Pytorch and ONNX.
+
+ **Note** Insert a table for the resulting benchmark.
 
 2. [MODNet ONNX conversion](notebooks/modnet_onnx_conversion/modnet_onnx_conversion.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
 
  - Adjustment of a prepared onnx model to a chosen static batch.
 
-3. [MODNet - onnx - TensorRT](notebooks/tensorrt/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utlising some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
+3. [MODNet - ONNX - TensorRT](notebooks/tensorrt/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utilizing some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
 
 
-### Scripts and Tools
+### Scripts
 
-Given that the the u2net scripts section has become so populated please see the u2net landing [page](scripts/u2net/README.md) for further instruction and functionality.
+This sections contains the training and evaluation scripts for MODNet.
 
-### Discussion and conclusion
+## Discussion and conclusion
 
 There were parallel research conducting aiming clothing matting together with the team members. One is the mentioned MODNet, the other is [U-2-Net](https://github.com/xuebinqin/U-2-Net).
 
@@ -95,7 +93,7 @@ During the weekly client meeting, we consistently compare, discuss the two model
 
 Based on the same device and same training size used for training, MODNet is quicker to train due to the lightweight architecture. For MODNet, 12 experiments were designed.
 
-1. Different impletation of data augmentations
+1. Different implementation of data augmentations
 2. Different raining sample sizes, types
 3. Varying training strategies: from scratch vs transfer learning
 4. Fine-tuning
