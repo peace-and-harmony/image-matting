@@ -64,21 +64,22 @@ Besides, it can be seen that the algorithms can handle varies backgrounds, e.g. 
 
 2. [MODNet eval](notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
 
-3. [MODNet quick inference](notebooks/modnet_pytorch_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint when only CPU is available.
+3. [MODNet quick inference](notebooks/modnet_pytorch_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained ONNX version checkpoint when only CPU is available or using TensorRT inference when GPU is available for a speedup inference.
 
 
 #### Inference
 
-1. [MODNet demo - Benchmark edition ](notebooks/modnet_demo_benchmark_edition.ipynb) - An initial on the rails demo
+1. [MODNet demo - Benchmark](notebooks/modnet_demo_benchmark.ipynb) - An initial on the rails demo
 of the original MODNet implementation including a comparison of the average inference runtime between Pytorch and ONNX.
+
+- Converting Pytorch model to the format of ONNX version
+- Inference runtime test over Pytorch and ONNX via CPU
+- Simplifying ONNX format using onnx-simplifier
+- Inference runtime comparison between ONNX and ONNX simplified model
 
  **Note** Insert a table for the resulting benchmark.
 
-2. [MODNet ONNX conversion](notebooks/modnet_onnx_conversion/modnet_onnx_conversion.ipynb) - A sandboxed implementation of `MODNet_ONNX.py` allowing the following:
-
- - Adjustment of a prepared onnx model to a chosen static batch.
-
-3. [MODNet - ONNX - TensorRT](notebooks/tensorrt/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utilizing some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
+2. [MODNet - ONNX - TensorRT](notebooks/tensorrt/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utilizing some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
 
 
 ### Scripts
