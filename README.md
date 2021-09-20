@@ -20,7 +20,7 @@
 Image matting is the research area that algorithms can accurately extract the foreground object of the corresponding photos or videos. The following figure illustrates one sample inference. The predicted alpha matte (right) can further used for extracting the foreground (middle) from the original image(left).
 
 <figure align="center">
-  <img src="images/sample_inference.png">
+  <img src="images/image_matting.png">
   <figcaption>Figure 1. Illustration of a sample inference.</figcaption>
 </figure>
 
@@ -48,11 +48,11 @@ MODNet was originally designed for portrait matting. Here, we adapted the archit
 The types of clothing includes dress, shoes, trousers, T-shirt, etc. corresponding results are illustrated in Figure 2.
 
 <figure align="center">
-  <img src="images/test.jpg">
+  <img src="images/inference_samples.jpg">
   <figcaption>Figure 2. Original image, foreground object, and corresponding alpha matte in each sub-figure on different categories.</figcaption>
 </figure>
 
-It is shown that the algorithms can handle varies backgrounds. And the model predicts well on the main categories including: hat, skirt, shoes, dress, shorts, blouse, hoodie, jeans.
+It is shown that the algorithms can handle varies backgrounds, e.g. placing items on the ground and sheet, and hanging items in front of door/wall, even with a low contrast. And the model predicts well on the main categories including: hats, skirt, shoes, dresses, shorts, blouses, hoodies, jeans. Part of the mentioned items are shown in Figure 2.
 
 ### notebooks
 
