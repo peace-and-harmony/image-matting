@@ -100,6 +100,13 @@ Based on the same device and same training size used for training, MODNet is qui
 4. Fine-tuning
 5. Sub-objective consistency adaption
 
+[ONNX simplifier](https://github.com/daquexian/onnx-simplifier) was further used for simplifying the model.
+
+<figure align="center">
+  <img src="images/inference_samples.jpg">
+  <figcaption>Figure 2. Foreground object, alpha matte, and the original image in each sub-figure are presented belong to different categories and backgrounds.</figcaption>
+</figure>
+
 As a conclusion, MODNet is trained quicker, and correspondingly has short inference runtime which is due to the decomposed image matting architecture. Whereas, MODNet is good at detail prediction(local features) because of the combination of attention mechanism and high resolution branch.
 U-2-Net has a nested U-net architecture which renders slow training and inference. However, due to the complexity of the model, U-2-Net did really well on semantic prediction.
 
