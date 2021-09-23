@@ -146,7 +146,6 @@ def main():
         modnet = modnet.cuda()
     else:
         print('Use CPU...')
-        modnet.load_state_dict(torch.load(pretrained_ckpt, map_location=torch.device('cpu')))
 
     # --------- 4. inference for each image ---------
     # im_names = os.listdir(input_path)
@@ -183,7 +182,10 @@ def main():
         im = F.interpolate(im, size=(im_rh, im_rw), mode='area')
 
         # inference
-        _, _, matte = modnet(im.cuda(), False)
+        if GPU:
+            _, _, matte = modnet(im.cuda(), False)
+        else:
+            _, _, matte = modnet(im, False)
 
         # resize and save matte
         matte = F.interpolate(matte, size=(im_h, im_w), mode='area')
