@@ -95,6 +95,8 @@ During the weekly client meeting, we consistently compare, discuss the two model
 Based on the same device and same training size used for training, MODNet is quicker to train due to the lightweight architecture. For MODNet, 12 experiments were designed.
 
 1. Different implementation of data augmentations
+- colorjitter was used for eliminating the low contrast image. For example, the very first sub-figure.
+- The model is trained for image matting the phone photos. Different angles might present when taking pictures. random rotation was deployed for eliminating the tilt images. For example, the right bottom sub-figure.
 2. Different raining sample sizes, types
 3. Varying training strategies: from scratch vs transfer learning
 4. Fine-tuning
