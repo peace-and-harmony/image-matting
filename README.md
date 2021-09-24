@@ -11,9 +11,10 @@
   * [Notebooks](#notebooks)
     * [MODNet](#modnet)
     * [Inference](#inference)
-  * [Scripts and tools](#scripts-and-tools)
+  * [Scripts](#scripts)
 * [Discussion and conclusion](#discussion-and-conclusion)
 * [Acknowledgement](#acknowledgement)
+* [Citation](#citation)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -57,14 +58,14 @@ Except for the ability of predicting variety of clothes, it is shown that the al
 
 #### MODNet
 
-1. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) - An illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The related scripts contain loading data along with allowing a user to continue training from stored session from the command line.
+1. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) An illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The related scripts contain loading data along with allowing a user to continue training from stored session from the command line.
 
 - Implementation of customized PyTorch based transforms
 - Initialization from a pre-trained backbone
 - The ability to resume after a stopped session
 - Storing and plotting the loss vs epoch relationship via tensorboard
 
-2. [MODNet eval](notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
+2. [MODNet eval](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/MODNet_eval.ipynb) This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
 
 - Guid through down loading Kaggle clothing dataset for test
 - To evaluate the model performance via Mean IoU metrics
