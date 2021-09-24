@@ -43,14 +43,14 @@ Based on the extracted foreground objects, many interesting tasks can be further
 
 ### The Story So Far
 
-MODNet was originally designed for portrait matting. Here, we adapted the architecture of MODNet to the domain of clothing matting, aiming to extract the clothing foreground object from daily photos for next step of recommendation system. The model predicts well on the categories including: hats, skirt, shoes, dresses, shorts, blouses, hoodies, jeans. Some of the mentioned items are shown in Figure 2.
+MODNet was originally designed for portrait matting. Here, we adapted the architecture of MODNet to the domain of clothing matting, aiming to extract the clothing foreground object from daily photos for next step of recommendation system. The model predicts well on the categories including: hats, skirt, shoes, dresses, shorts, blouses, hoodies, jeans, etc. Some of the mentioned items are shown in Figure 2.
 
 <figure align="center">
   <img src="images/inference_samples.jpg">
   <figcaption>Figure 2. Foreground object, alpha matte, and the original image in each sub-figure are presented belong to different categories and backgrounds.</figcaption>
 </figure>
 
-Besides, it can be seen that the algorithms can handle varies backgrounds, e.g. flatly placing items on the ground/sheet, or hanging items in front of door/wall, even with a low contrast as shown in the first sub-figure.
+Except for the ability of predicting variety of clothes, it is shown that the algorithm can handle diverse backgrounds, e.g. flatly placing items on the ground/sheet, or hanging items in front of door/wall, even with a low contrast which is illustrated in the first sub-figure of Figure 2.
 
 ### notebooks
 
