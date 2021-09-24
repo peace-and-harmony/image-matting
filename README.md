@@ -58,28 +58,28 @@ Except for the ability of predicting variety of clothes, it is shown that the al
 
 #### MODNet
 
-1. [MODNet sandboxed training](notebooks/MODNet_train.ipynb) An illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The related scripts contain loading data along with allowing a user to continue training from stored session from the command line.
+  1. [MODNet sandboxed training](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/MODNet_train.ipynb) - An illustration of how to train MODNet on the customized training dataset whether via an Ipython interactive environment, local machine or vm instance. The related scripts contain loading data along with allowing a user to continue training from stored session from the command line.
 
-- Implementation of customized PyTorch based transforms
-- Initialization from a pre-trained backbone
-- The ability to resume after a stopped session
-- Storing and plotting the loss vs epoch relationship via tensorboard
+  - Implementation of customized PyTorch based transforms
+  - Initialization from a pre-trained backbone
+  - The ability to resume after a stopped session
+  - Storing and plotting the loss vs epoch relationship via tensorboard
 
-2. [MODNet eval](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/MODNet_eval.ipynb) This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
+  2. [MODNet eval](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/MODNet_eval.ipynb) - This notebook provides evaluation procedure on validation set or test set via loading saved checkpoint. The accuracy metrics is based on the Mean Intersection-Over-Union (MIoU).
 
-- Guid through down loading Kaggle clothing dataset for test
-- To evaluate the model performance via Mean IoU metrics
-- Display the inference images
+  - Guid through down loading Kaggle clothing dataset for test
+  - To evaluate the model performance via Mean IoU metrics
+  - Display the inference images
 
 #### Inference
 
-1. [MODNet quick inference](notebooks/modnet_pytorch_quick_inference) - This notebook provides a quick test inference on your image via the pre-trained checkpoint.
+1. [MODNet quick inference](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/modnet_quick_inference.ipynb) - This notebook provides a quick test inference on your image via the pre-trained checkpoint.
 
 - A quick instruction for using the algorithm to perform foreground object extraction
 - Uploading the customized images
 - Performing inference and display the corresponding combined results
 
-2. [MODNet demo - Benchmark](notebooks/modnet_demo_benchmark.ipynb) - An initial on the rails demo
+2. [MODNet demo - Benchmark](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/modnet_demo_benchmark.ipynb) - An initial on the rails demo
 of the original MODNet implementation including a comparison of the average inference runtime between Pytorch and ONNX.
 
 - Converting Pytorch model to the format of ONNX version
@@ -89,7 +89,7 @@ of the original MODNet implementation including a comparison of the average infe
 
  **Note** Insert a table for the resulting benchmark.
 
-3. [MODNet - ONNX - TensorRT](notebooks/tensorrt/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utilizing some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
+3. [MODNet - ONNX - TensorRT](https://github.com/peace-and-harmony/image-matting/blob/main/notebooks/modnet_tensorrt.ipynb) - A full Tesnorflow/ Keras based run through of the huge speedup that can be yielded by utilizing some of the emerging intermediate representation platforms. The notebooks provides before and after latency benchmarks, guides the user through conversion and ultimately builds a tensort engine for device specific deployment.
 
 
 ### Scripts
