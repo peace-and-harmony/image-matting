@@ -13,6 +13,7 @@
     * [Inference](#inference)
   * [Scripts and tools](#scripts-and-tools)
 * [Discussion and conclusion](#discussion-and-conclusion)
+* [Acknowledgement](#acknowledgement)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -67,7 +68,7 @@ Except for the ability of predicting variety of clothes, it is shown that the al
 
 - Guid through down loading Kaggle clothing dataset for test
 - To evaluate the model performance via Mean IoU metrics
-- Display the inferenced images
+- Display the inference images
 
 #### Inference
 
@@ -76,8 +77,6 @@ Except for the ability of predicting variety of clothes, it is shown that the al
 - A quick instruction for using the algorithm to perform foreground object extraction
 - Uploading the customized images
 - Performing inference and display the corresponding combined results
-
-
 
 2. [MODNet demo - Benchmark](notebooks/modnet_demo_benchmark.ipynb) - An initial on the rails demo
 of the original MODNet implementation including a comparison of the average inference runtime between Pytorch and ONNX.
@@ -100,64 +99,54 @@ This sections contains the training and evaluation scripts for MODNet.
 
 There were parallel research conducting aiming clothing matting together with the team members. One is the mentioned MODNet, the other is [U-2-Net](https://github.com/xuebinqin/U-2-Net).
 
-During the weekly client meeting, we consistently compare, discuss the two models.
+During the weekly client meeting, we consistently compare, discuss the two models. It's interesting to find that U-2-Net is superior in terms of semantic prediction and robustness to the data augmentations. MODNet performs better on details(contour of the foreground object) prediction.
 
-Based on the same device and same training size used for training, MODNet is quicker to train due to the lightweight architecture. For MODNet, 12 experiments were designed.
+Based on the same device and same training size used for training, MODNet is quicker to train due to the lightweight architecture. For MODNet, 12 experiments were designed, including:
 
 1. Different implementation of data augmentations
-- colorjitter was used for eliminating the low contrast image. For example, the very first sub-figure.
-- The model is trained for image matting the phone photos. Different angles might present when taking pictures. random rotation was deployed for eliminating the tilt images. For example, the right bottom sub-figure.
+- ColorJitter was used for predicting the low contrast image. For example, the very first sub-figure.
+- Considering the foreground object from mobile photos might not be always the same direction. Random rotation was introduced for recognizing the tilt images. For example, the right bottom sub-figure.
 2. Different raining sample sizes, types
 3. Varying training strategies: from scratch vs transfer learning
 4. Fine-tuning
-5. Sub-objective consistency adaption
+5. Sub-objective consistency adaption proposed by MODNet author
 
-[ONNX simplifier](https://github.com/daquexian/onnx-simplifier) was further used for simplifying the model.
+According to the evaluation result and testing inference, we found the experiment with aggressive data augmentations and portrait matting pretrained weights provided by MODNet author demonstrates the highest accuracy which is measured via MIoU: 0.936.
+
+[ONNX simplifier](https://github.com/daquexian/onnx-simplifier) was further used for simplifying the model. Author claim that the method is used to replace the verbose operators with the constant outputs. It's interesting to visualize computation graph after applying the simplifier to MODNet. The comparison between original architecture and simplified one is presented in Figure 3.
 
 <figure align="center">
-  <img src="images/inference_samples.jpg">
-  <figcaption>Figure 2. Foreground object, alpha matte, and the original image in each sub-figure are presented belong to different categories and backgrounds.</figcaption>
+  <img src="images/combine_model_graph.jpeg">
+  <figcaption>Figure 3. Comparison of the simplified part of the model graph using ONNX simplifier.</figcaption>
 </figure>
 
-As a conclusion, MODNet is trained quicker, and correspondingly has short inference runtime which is due to the decomposed image matting architecture. Whereas, MODNet is good at detail prediction(local features) because of the combination of attention mechanism and high resolution branch.
-U-2-Net has a nested U-net architecture which renders slow training and inference. However, due to the complexity of the model, U-2-Net did really well on semantic prediction.
 
+As a conclusion, MODNet is trained quicker, and correspondingly has short inference runtime which is due to the decomposed image matting architecture. Meanwhile, MODNet is good at detail prediction(local features) because of the combination of attention mechanism and high resolution branch.
+U-2-Net has a nested U-net architecture which renders relatively slow training and inference. However, due to the complexity of the model, U-2-Net performs well on semantic prediction.
 
-<!--
-## Welcome to GitHub Pages
+# Acknowledgement
 
-You can use the [editor on GitHub](https://github.com/peace-and-harmony/image-matting/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Thanks to @rhysdg for the overall guidance through the current project.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Citation
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bibtex
+@article{ke2020green,
+  title={Is a Green Screen Really Necessary for Real-Time Portrait Matting?},
+  author={Ke, Zhanghan and Li, Kaican and Zhou, Yurou and Wu, Qiuhua and Mao, Xiangyu and Yan, Qiong and Lau, Rynson WH},
+  journal={arXiv preprint arXiv:2011.11961},
+  year={2020}
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/peace-and-harmony/image-matting/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out. -->
+```bibtex
+@article{qin2020u2,
+  title={U2-Net: Going deeper with nested U-structure for salient object detection},
+  author={Qin, Xuebin and Zhang, Zichen and Huang, Chenyang and Dehghan, Masood and Zaiane, Osmar R and Jagersand, Martin},
+  journal={Pattern Recognition},
+  volume={106},
+  pages={107404},
+  year={2020},
+  publisher={Elsevier}
+}
+```
