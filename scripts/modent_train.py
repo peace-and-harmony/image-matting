@@ -114,12 +114,12 @@ class ImagesDataset(Dataset):
 def build_argparser():
     parser = ArgumentParser(add_help=False)
     args = parser.add_argument_group('Options')
-    args.add_argument("-p", "--path", help="Input path -this should be your inference folder", type=str, default=None)
+    args.add_argument("-p", "--path", help="Input path -this should be the folder storing checkpoint.pth", type=str, default=None)
     args.add_argument("-ts", "--trainpath", help="Path to tour original images", type=str, default=None)
     args.add_argument("-s", "--efreq", help="Epoch frequency with wich to save the model stat", type=int, default=1)
     args.add_argument("-e", "--enum", help="Number of overall epochs", type=int, default=80)
     args.add_argument("-b", "--batch", help="Training batch size", type=int, default=16)
-    args.add_argument("-w", "--nworkers", help="Number of workers", type=int, default=2)
+    args.add_argument("-w", "--nworkers", help="Number of workers", type=int, default=0)
     args.add_argument("-l", "--learningrate", help="Define learning rate", type=float, default=0.01)
     args.add_argument("--resume",help='return training from the last model and optimizer state', action="store_true")
 
