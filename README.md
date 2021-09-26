@@ -104,15 +104,22 @@ During the weekly client meeting, we consistently compare, discuss the two model
 
 Based on the same device and same training size used for training, MODNet is quicker to train due to the lightweight architecture. For MODNet, 12 experiments were designed, including:
 
-1. Different implementation of data augmentations
+1. Implement different combination of data augmentations
 - ColorJitter was used for predicting the low contrast image. For example, the very first sub-figure.
-- Considering the foreground object from mobile photos might not be always the same direction. Random rotation was introduced for recognizing the tilt images. For example, the right bottom sub-figure.
-2. Different raining sample sizes, types
-3. Varying training strategies: from scratch vs transfer learning
+- Considering the foreground object from mobile photos might not be always the same direction. Random rotation was introduced for recognizing the tilt images. For example, the right bottom sub-figure. Whereas, when implementing rotation of the training samples and corresponding ground truths, the model loses the ability to predicts the straps of camisoles. This might due to the padding of the unknown area after rotation. Since a large increase of the MIoU, it is decided to include the random rotation.
+- It is found that the overall loss is higher when incorporating random rotation which we think is also caused by the padding of the unknown area.
+2. Different training sample sizes
+- It is found that the U-2-Net kept improving the MIoU, while MODNet was not much sensitive to the size of the dataset after some specific number of samples.
+3. Varying training strategies: scratch vs transfer learning
+- The experiment with pre-trained weights indicated higher accuracy which was consistent with the result from MODNet author.
+- Due to a large variety of categories of clothing, and small amount of accurately annotated training samples, the model only performed well for some specific types of clothing.
 4. Fine-tuning
-5. Sub-objective consistency adaption proposed by MODNet author
+- In one experiment, the backbone was fine-tuned after 115(total 156) layers. The accuracy improved less than 1%.
+5. Sub-objective consistency(SOC) adaption proposed by MODNet author
+- The Sub-objective consistency belongs to semi-supervised learning. We applied SOC for the stored checkpoint. It is found that the MIoU is slightly decreased compared with MODNet weights. After careful checking of some results, we found that some predictions were improved via SOC adaption and some predictions were actually degraded after SOC. The mechanism of SOC strategy is to decrease the entropy between the predicted semantics and matte of the unlabeled data during training. Due to large amount of clothing types and lack of training samples mentioned in above discussion, it might be hard to reach the point that the SOC strategy can really help to improved the performance.
+- Among the decomposed branches, the semantic prediction branch largely determine the final matte prediction. Hence, the high accuracy of the semantic prediction is critic for the SOC strategy which further might boost the accuracy matrics.
 
-According to the evaluation result and testing inference, we found the experiment with aggressive data augmentations and portrait matting pretrained weights provided by MODNet author demonstrates the highest accuracy which is measured via MIoU: 0.936.
+According to the evaluation result and testing inference, we found the experiment with aggressive data augmentations and portrait matting pre-trained weights provided by MODNet author demonstrates the highest accuracy which is measured via MIoU: 0.936.
 
 [ONNX simplifier](https://github.com/daquexian/onnx-simplifier) was further used for simplifying the model. Author claim that the method is used to replace the verbose operators with the constant outputs. It's interesting to visualize computation graph after applying the simplifier to MODNet. The comparison between original architecture and simplified one is presented in Figure 3.
 
@@ -122,7 +129,7 @@ According to the evaluation result and testing inference, we found the experimen
 </figure>
 
 
-As a conclusion, MODNet is trained quicker, and correspondingly has short inference runtime which is due to the decomposed image matting architecture. Meanwhile, MODNet is good at detail prediction(local features) because of the combination of attention mechanism and high resolution branch.
+As a conclusion, MODNet is trained quicker, and correspondingly has short inference runtime which is due to the decomposed image matting architecture.  Meanwhile, MODNet is good at detail prediction(local features) because of the combination of attention mechanism and high resolution branch.
 U-2-Net has a nested U-net architecture which renders relatively slow training and inference. However, due to the complexity of the model, U-2-Net performs well on semantic prediction.
 
 # Acknowledgement
