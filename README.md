@@ -113,8 +113,13 @@ Based on the same device and same training size used for training, MODNet is qui
 3. Varying training strategies: scratch vs transfer learning
 - The experiment with pre-trained weights indicated higher accuracy which was consistent with the result from MODNet author.
 - Due to a large variety of categories of clothing, and a small amount of accurately annotated training samples, the model only performed well for some specific types of clothing.
-4. Fine-tuning
-- In one experiment, the backbone was fine-tuned after 115(total 156) layers. The accuracy improved by less than 1%.
+4. Transfer learning and Fine-tuning
+Considering there is some subordinate relationship between the pre-trained portrait weights from MODNet author and our clothing matting task, we performed the transfer learning experiment aiming to utilize the pre-trained layers to extract low-level features.
+- Firstly, freeze the backbone weights from MODNet author's weights, and train the model on our training samples.
+- Secondly, when the model was converged, we adjusted the last few layers of the backbone to trainable for fine-tuning corresponding weights.
+- The backbone was fine-tuned after 115(total 156) layers.
+Although this model performed inferior compared with the reported weights in terms of the MeanIoU, interestingly, we found this model predicted well on the details and some extreme test samples which is still hard for the reported weights.
+
 5. Sub-objective consistency(SOC) adaption proposed by MODNet author
 - The Sub-objective consistency belongs to semi-supervised learning. We applied SOC for the stored checkpoint. It is found that the MIoU is slightly decreased compared with MODNet weights. After careful checking of some results, we found that some predictions were improved via SOC adaption and some predictions were actually degraded after SOC. The mechanism of SOC strategy is to decrease the entropy between the predicted semantics and matte of the unlabeled data during training. Due to a large amount of clothing types and lack of training samples mentioned in the above discussion, it might be hard to reach the point that the SOC strategy can help to improve the performance.
 - Among the decomposed branches, the semantic prediction branch largely determines the final matte prediction. Hence, the high accuracy of the semantic prediction is detrimental for the SOC strategy which further might boost the accuracy matrics.
